@@ -1,21 +1,41 @@
-import { StatusBar } from 'expo-status-bar';
 import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+
+import { SafeAreaView } from 'react-native-safe-area-context';
+import { ActivityIndicator, StatusBar, StyleSheet } from 'react-native';
+
+import THEME from '@theme/index';
+import {
+  Inter_400Regular,
+  Inter_700Bold,
+  useFonts,
+} from '@expo-google-fonts/inter';
+
+import { Home } from '@screens/Home';
 
 export default function App() {
+  const [fontsLoaded] = useFonts({
+    Inter_400Regular,
+    Inter_700Bold,
+  });
+
   return (
-    <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
-      <StatusBar style="auto" />
-    </View>
+    <SafeAreaView style={styles.container}>
+      <StatusBar
+        barStyle="light-content"
+        backgroundColor={THEME.COLORS.PURPLE}
+      />
+      {fontsLoaded ? (
+        <Home />
+      ) : (
+        <ActivityIndicator size="large" color={THEME.COLORS.PURPLE} />
+      )}
+    </SafeAreaView>
   );
 }
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
+    backgroundColor: THEME.COLORS.GRAY_600,
   },
 });
