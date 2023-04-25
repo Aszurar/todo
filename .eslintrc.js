@@ -10,19 +10,11 @@ module.exports = {
         '@typescript-eslint/no-shadow': ['error'],
         'no-shadow': 'off',
         'no-undef': 'off',
-        'sort-imports': [
-          'error',
-          { ignoreCase: true, ignoreDeclarationSort: true },
-        ],
+        'sort-imports': ['error', { ignoreCase: true, ignoreDeclarationSort: true }],
         'import/order': [
           'error',
           {
-            groups: [
-              ['external', 'builtin'],
-              'internal',
-              ['sibling', 'parent'],
-              'index',
-            ],
+            groups: [['external', 'builtin'], 'internal', ['sibling', 'parent'], 'index'],
             pathGroups: [
               {
                 pattern: 'react',
@@ -35,8 +27,7 @@ module.exports = {
                 position: 'before',
               },
               {
-                pattern:
-                  '{react*,react-*,@react*,@react-*,@react*/**,@react-*/**,expo*,styled-components/**,}',
+                pattern: '{react*,react-*,@react*,@react-*,@react*/**,@react-*/**,expo*,styled-components/**,}',
                 group: 'external',
                 position: 'before',
               },
@@ -46,8 +37,7 @@ module.exports = {
                 position: 'before',
               },
               {
-                pattern:
-                  '{@icons/**,@images/**,assets/**,../assets/**,../../assets/**}',
+                pattern: '{@icons/**,@images/**,assets/**,../assets/**,../../assets/**}',
                 group: 'internal',
                 position: 'before',
               },
@@ -58,26 +48,22 @@ module.exports = {
                 position: 'before',
               },
               {
-                pattern:
-                  '{@atoms/**,@molecules/**,@organisms/**,components/**,../components/**,../../components/**}',
+                pattern: '{@atoms/**,@molecules/**,@organisms/**,components/**,../components/**,../../components/**}',
                 group: 'internal',
                 position: 'before',
               },
               {
-                pattern:
-                  '{@styles/**,@utils/**,utils/**,../utils/**,../../utils/**}',
+                pattern: '{@styles/**,@utils/**,utils/**,../utils/**,../../utils/**}',
                 group: 'internal',
                 position: 'before',
               },
               {
-                pattern:
-                  '{@dtos/**,@translations/**,@dto/**,dto/**,../dto/**,../../dto/**}',
+                pattern: '{@dtos/**,@translations/**,@dto/**,dto/**,../dto/**,../../dto/**}',
                 group: 'internal',
                 position: 'before',
               },
               {
-                pattern:
-                  './styles,@theme/**,theme/**,../theme/**,../../theme/**',
+                pattern: './styles,@theme/**,theme/**,../theme/**,../../theme/**',
                 group: 'internal',
                 position: 'before',
               },
