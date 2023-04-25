@@ -3,11 +3,28 @@
     "name": "todo",
     "slug": "todo",
     "version": "1.0.0",
+    "orientation": "portrait",
+    "icon": "./assets/icon.png",
+    "userInterfaceStyle": "light",
+    "splash": {
+      "image": "./assets/splash.png",
+      "resizeMode": "contain",
+      "backgroundColor": "#ffffff"
+    },
     "assetBundlePatterns": [
       "**/*"
     ],
-    "sdkVersion": "48.0.0",
-    "entryPoint": ".vscode\\exponentIndex.js"
-  },
-  "name": "todo"
+    "ios": {
+      "supportsTablet": true
+    },
+    "android": {
+      "adaptiveIcon": {
+        "foregroundImage": "./assets/adaptive-icon.png",
+        "backgroundColor": "#ffffff"
+      }
+    },
+    "web": {
+      "favicon": "./assets/favicon.png"
+    }
+  }
 }
