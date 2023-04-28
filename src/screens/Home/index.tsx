@@ -7,6 +7,7 @@ import {
   View,
 } from 'react-native';
 
+import { TodoInfo } from '@atoms/TodoInfo';
 import { Spacer } from '@atoms/Spacer';
 import { Input } from '@atoms/Input';
 import { Header } from '@atoms/Header';
@@ -31,6 +32,11 @@ export function Home() {
           <Spacer horizontal={4} />
           <AddButton />
         </View>
+
+        <View style={styles.headerList}>
+          <TodoInfo title="Criadas" value={0} />
+          <TodoInfo title="Concluídas" color="blue" value={0} />
+        </View>
       </View>
     </TouchableWithoutFeedback>
   );
@@ -41,5 +47,11 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     paddingHorizontal: 24,
     marginTop: -32,
+  },
+  headerList: {
+    flexDirection: 'row',
+    marginTop: 32,
+    paddingHorizontal: 24,
+    justifyContent: 'space-between',
   },
 });
