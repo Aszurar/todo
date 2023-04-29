@@ -1,4 +1,5 @@
 import React from 'react';
+import 'react-native-gesture-handler';
 
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { ActivityIndicator, StatusBar, StyleSheet } from 'react-native';
