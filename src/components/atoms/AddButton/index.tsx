@@ -1,37 +1,26 @@
-import React, { useState } from 'react';
+import React from 'react';
 
-import { Pressable, StyleSheet } from 'react-native';
+import {
+  GestureHandlerRootView,
+  RectButton,
+} from 'react-native-gesture-handler';
+import { StyleSheet } from 'react-native';
 
 import THEME from '@theme/index';
 
 import PLUSSVG from '@icons/plus.svg';
 
-export function AddButton() {
-  const [activated, setActivated] = useState(false);
+type AddButtonProps = {
+  onPress: () => void;
+};
 
-  function handleActivated() {
-    setActivated(true);
-  }
-  function handleDeactivated() {
-    setActivated(false);
-  }
-
-  const activatedStyle = {
-    backgroundColor: THEME.COLORS.PURPLE,
-  };
-  const deactivatedStyle = {
-    backgroundColor: THEME.COLORS.PURPLE_DARK,
-  };
-
-  const additionalStyle = activated ? activatedStyle : deactivatedStyle;
-
+export function AddButton({ onPress }: AddButtonProps) {
   return (
-    <Pressable
-      style={[styles.container, additionalStyle]}
-      onPressIn={handleActivated}
-      onPressOut={handleDeactivated}>
-      <PLUSSVG height={16} width={16} />
-    </Pressable>
+    <GestureHandlerRootView>
+      <RectButton style={styles.container} onPress={onPress}>
+        <PLUSSVG height={16} width={16} />
+      </RectButton>
+    </GestureHandlerRootView>
   );
 }
 
@@ -42,5 +31,6 @@ const styles = StyleSheet.create({
     borderRadius: 6,
     alignItems: 'center',
     justifyContent: 'center',
+    backgroundColor: THEME.COLORS.PURPLE,
   },
 });
