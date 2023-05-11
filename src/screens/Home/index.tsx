@@ -1,8 +1,9 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 
 import {
   FlatList,
   Keyboard,
+  RefreshControl,
   StyleSheet,
   Text,
   TouchableWithoutFeedback,
@@ -10,16 +11,16 @@ import {
 } from 'react-native';
 import * as Crypto from 'expo-crypto';
 
-import THEME from '@theme/index';
-
 import { TodoInfo } from '@atoms/TodoInfo';
-import { TodoCard, TodoCardMemo } from '@atoms/TodoCard';
+import { MemoizedTodoCard } from '@atoms/TodoCard';
 import { Spacer } from '@atoms/Spacer';
 import { Input } from '@atoms/Input';
 import { Header } from '@atoms/Header';
 import { AddButton } from '@atoms/AddButton';
 
 import { MAX_TOTO_TITLE_LENGTH, TODO_DEFAULT, TodoProps } from '@dto/todoDTO';
+
+import THEME from '@theme/index';
 
 const keyExtractor = (item: TodoProps) => item.id;
 const ItemSeparator = () => <Spacer vertical={8} />;
@@ -61,23 +62,25 @@ export function Home() {
   }
 
   function handleDeleteTodo(id: string) {
-    const newTodoList = todoList.filter(item => item.id !== id);
-    setTodoList(newTodoList);
+    const index = todoList.findIndex(item => item.id === id);
+    if (index !== -1) {
+      const newTodoList = [...todoList];
+      newTodoList.splice(index, 1);
+      setTodoList(newTodoList);
+    }
   }
 
   function handleCheckTodo(id: string) {
-    const newTodoList = todoList.map(item => {
-      if (item.id === id) {
-        return { ...item, isChecked: !item.isChecked };
-      }
-      return item;
+    setTodoList(prevTodoList => {
+      return prevTodoList.map(item => {
+        if (item.id === id) {
+          return { ...item, isChecked: !item.isChecked };
+        }
+        return item;
+      });
     });
-    setTodoList(newTodoList);
   }
 
-  useEffect(() => {
-    console.log(todoList);
-  }, [todoList]);
   return (
     <TouchableWithoutFeedback onPress={handleKeyboardDeactivate}>
       <View style={styles.container}>
@@ -111,7 +114,7 @@ export function Home() {
           data={todoList}
           keyExtractor={keyExtractor}
           renderItem={({ item }) => (
-            <TodoCard
+            <MemoizedTodoCard
               item={item}
               onChecked={() => handleCheckTodo(item.id)}
               onDelete={() => handleDeleteTodo(item.id)}
@@ -119,6 +122,13 @@ export function Home() {
           )}
           ItemSeparatorComponent={ItemSeparator}
           contentContainerStyle={styles.contentContainerList}
+          refreshControl={
+            <RefreshControl
+              refreshing={false}
+              onRefresh={() => console.log('refresh')}
+              colors={['red', 'green', 'blue']}
+            />
+          }
         />
       </View>
     </TouchableWithoutFeedback>
