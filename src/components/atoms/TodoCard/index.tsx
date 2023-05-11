@@ -64,8 +64,8 @@ export function TodoCard({ item, onChecked, onDelete }: TodoCardProps) {
         fillColor={THEME.COLORS.BLUE_DARK}
         unfillColor={THEME.COLORS.GRAY_400}
         disableBuiltInState
-        isChecked={item.isChecked}
         onPress={onChecked}
+        isChecked={item.isChecked}
         innerIconStyle={[
           styles.checkboxBorderWidth,
           cardStyle.borderColorCheckBox,
@@ -100,7 +100,7 @@ const styles = StyleSheet.create({
     backgroundColor: THEME.COLORS.GRAY_400,
   },
   checkBoxStyle: {
-    marginRight: 8,
+    padding: 8,
   },
   checkBoxborderColor: {
     borderColor: THEME.COLORS.BLUE,
@@ -119,6 +119,6 @@ const styles = StyleSheet.create({
   },
 });
 
-export const TodoCardMemo = memo(TodoCard, (prevProps, nextProps) => {
-  return Object.is(prevProps, nextProps);
+export const MemoizedTodoCard = memo(TodoCard, (prevProps, nextProps) => {
+  return prevProps.item.isChecked === nextProps.item.isChecked;
 });
